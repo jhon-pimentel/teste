@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prepara Cursos e Concursos - Escolha sua Turma</title>
+    <meta name="description"
+        content="Garanta sua vaga na turma presencial do Prepara. Cursos e Concursos com excelência em São Luís.">
+
+    <!-- Google Fonts: Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --color-primary: #00297C;
+            --color-primary-light: #003399;
+            /* Used for gradients/hover */
+            --color-accent: #FBB63A;
+            /* Yellow */
+            --color-accent-hover: #e0a334;
+            --color-alert: #E83C34;
+            --color-text-main: #1A1A1A;
+            --color-text-light: #666666;
+            --color-bg-body: #F5F7FA;
+            --color-white: #FFFFFF;
+            --color-border: #E0E0E0;
+
+            --font-main: 'Montserrat', sans-serif;
+
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 20px rgba(0, 41, 124, 0.08);
+            /* slight blue tint */
+            --shadow-lg: 0 8px 30px rgba(0, 41, 124, 0.12);
+
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-pill: 50px;
+
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-bg-body);
+            color: var(--color-text-main);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- HEADER / HERO --- */
+        header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: var(--color-white);
+            padding: 60px 0 80px;
+            /* Extra padding bottom for overlap effect */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle noise texture overlay */
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        /* Logo Placeholder */
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-img {
+            max-width: 200px;
+            height: auto;
+            display: block;
+        }
+
+        .logo-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            color: var(--color-white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.125rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 24px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            border: 1px solid rgba(251, 182, 58, 0.3);
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 24px;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* --- CARDS SECTION --- */
+        .cards-section {
+            margin-top: -50px;
+            /* Overlap header */
+            padding-bottom: 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover,
+        .card:focus-within {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(251, 182, 58, 0.5);
+            /* sutil accent border */
+        }
+
+        .card:active {
+            transform: scale(0.99);
+        }
+
+        .card-header {
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+            line-height: 1.4;
+        }
+
+        .chips-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .chip {
+            font-size: 0.75rem;
+            background: #F0F4FF;
+            color: var(--color-primary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .chip.accent {
+            background: #FFF8E1;
+            color: #D99000;
+        }
+
+        .benefits-list {
+            margin-top: auto;
+            margin-bottom: 24px;
+            background: #FAFAFA;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            margin-bottom: 6px;
+        }
+
+        .benefit-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .benefit-icon {
+            color: var(--color-accent);
+            font-weight: bold;
+        }
+
+        .btn-card {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--color-primary);
+            color: white;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            text-align: center;
+            transition: background 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card:hover .btn-card {
+            background-color: var(--color-primary-light);
+        }
+
+        /* --- SOCIAL PROOF --- */
+        .social-proof {
+            padding: 40px 0;
+            background-color: #FAFAFA;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .sp-headline {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .testimonials-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .testi-item {
+            background: white;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            max-width: 300px;
+            text-align: left;
+            flex: 1 1 250px;
+        }
+
+        .testi-text {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .testi-author {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 41, 124, 0.6);
+            /* tinted overlay */
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 32px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: transparent;
+            font-size: 1.5rem;
+            color: #999;
+            transition: color 0.2s;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-modal:hover {
+            color: var(--color-alert);
+            background: #FFF0F0;
+        }
+
+        .modal-header {
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .modal-subtitle {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            margin-top: 4px;
+        }
+
+        /* STEPPER */
+        .stepper-progress {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .step-bar {
+            height: 4px;
+            flex: 1;
+            background: #E0E0E0;
+            border-radius: 2px;
+            transition: background 0.3s;
+        }
+
+        .step-bar.active {
+            background: var(--color-primary);
+        }
+
+        .step-bar.completed {
+            background: var(--color-primary);
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-text-main);
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(0, 41, 124, 0.1);
+        }
+
+        .form-input.error {
+            border-color: var(--color-alert);
+        }
+
+        .error-msg {
+            font-size: 0.75rem;
+            color: var(--color-alert);
+            margin-top: 4px;
+            display: none;
+        }
+
+        .summary-box {
+            background: #F5F7FA;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .summary-box strong {
+            color: var(--color-primary);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 41, 124, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 41, 124, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-text-light);
+            margin-top: 0;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary:hover {
+            color: var(--color-text-main);
+            background: #f0f0f0;
+        }
+
+        /* Loader inside button */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #888;
+            border-top: 1px solid #eee;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .cards-section {
+                margin-top: -30px;
+            }
+
+            .modal-container {
+                padding: 24px;
+                width: 95%;
+            }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <header>
+        <div class="container text-center">
+            <div class="logo-area">
+                <img src="logo.png" alt="Prepara Cursos e Concursos" class="logo-img">
+            </div>
+
+            <div class="hero-content">
+                <div class="trust-badge">
+                    <span>🏆</span> 100% Presencial
+                </div>
+                <h1 style="margin-top:16px;">Escolha sua turma</h1>
+                <p>Preencha seus dados em 20s e fale com nossa equipe direto no WhatsApp. Vagas limitadas.</p>
+
+                <div class="stats-row">
+                    <div class="stat-item">✅ <span id="student-count">+5.000 Alunos</span></div>
+                    <div class="stat-item">⚡ Atendimento Rápido</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CARDS SECTION -->
+    <section class="cards-section">
+        <div class="container">
+            <div class="cards-grid" id="courseGrid">
+                <!-- Cards will be injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="sp-headline">MÉTODO, CONSTÂNCIA E APROVAÇÃO</div>
+            <div class="testimonials-grid">
+                <div class="testi-item">
+                    <div class="testi-text">"O suporte presencial faz toda diferença. A equipe te acompanha de verdade."
+                    </div>
+                    <div class="testi-author">- Ana Paula S.</div>
+                </div>
+                <div class="testi-item">
+                    <div class="testi-text">"Material focado no edital, sem enrolação. Ajudou muito na minha aprovação."
+                    </div>
+                    <div class="testi-author">- Carlos Mendes</div>
+                </div>
+                <div class="testi-item">
+                    <div class="testi-text">"Ambiente sério e comprometido. Recomendo para quem quer estudar de
+                        verdade."</div>
+                    <div class="testi-author">- Marina Lima</div>
+                </div>
+            </div>
+            <p style="margin-top:30px; font-size:0.75rem; color:#aaa;">© 2024 Prepara Cursos. Todos os direitos
+                reservados.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+    </footer>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="leadModal" aria-hidden="true">
+        <div class="modal-container" role="dialog" aria-modal="true">
+            <button class="close-modal" id="closeModal" aria-label="Fechar">&times;</button>
+
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalCourseTitle">Nome da Turma</h3>
+                <p class="modal-subtitle">Garanta sua vaga agora.</p>
+            </div>
+
+            <div class="stepper-progress">
+                <div class="step-bar active" id="barStep1"></div>
+                <div class="step-bar" id="barStep2"></div>
+            </div>
+
+            <form id="leadForm">
+                <!-- STEP 1 -->
+                <div class="form-step active" id="step1">
+                    <div class="form-group">
+                        <label class="form-label" for="inputName">Nome Completo</label>
+                        <input type="text" class="form-input" id="inputName" placeholder="Seu nome" required>
+                        <div class="error-msg" id="errName">Preencha seu nome.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="inputEmail">E-mail</label>
+                        <input type="email" class="form-input" id="inputEmail" placeholder="seu@email.com" required>
+                        <div class="error-msg" id="errEmail">E-mail inválido.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="inputPhone">WhatsApp (com DDD)</label>
+                        <input type="tel" class="form-input" id="inputPhone" placeholder="(98) 99999-9999"
+                            maxlength="15" required>
+                        <div class="error-msg" id="errPhone">Telefone inválido.</div>
+                    </div>
+
+                    <button type="button" class="btn-primary" id="btnNext">Continuar</button>
+                    <p style="text-align:center; font-size:0.75rem; color:#999; margin-top:12px;">Seus dados estão
+                        seguros.</p>
+                </div>
+
+                <!-- STEP 2 -->
+                <div class="form-step" id="step2">
+                    <div class="summary-box">
+                        <p><strong>Turma Selecionada:</strong> <span id="summaryCourse">...</span></p>
+                        <p style="margin-top:8px;"><strong>WhatsApp:</strong> <span id="summaryPhone">...</span></p>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="btnSubmit">
+                        Enviar e ir para WhatsApp
+                    </button>
+                    <button type="button" class="btn-secondary" id="btnBack">Voltar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast">Redirecionando para o WhatsApp...</div>
+
+    <script>
+        // --- CONFIGURATION ---
+        // ⚠️ ALERTA: Substitua pela URL do seu Web App do Google Apps Script após o deploy
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbybA9qWSLlegnieNDt4dMY2aE1Ud374g2SlQpnKQ5-OF4JMc4WT_zaZd5yhbE1KfryU/exec";
+        const WHATSAPP_NUMBER = "5598991234567"; // Apenas números
+
+        // --- DATA ---
+        const courses = [
+            {
+                id: "seduc-ma",
+                title: "Turma Prepara SEDUC MA",
+                desc: "Foco total no edital da educação.",
+                chips: ["Presencial", "Grande Ilha", "Intensivo"],
+                benefits: ["Material atualizado", "Resolução de questões"],
+                accent: false
+            },
+            {
+                id: "operacao-farda",
+                title: "Operação Farda",
+                desc: "PMMA + CBMMA (Combo Policial).",
+                chips: ["Presencial", "Carreira Policial", "Tática"],
+                benefits: ["Treino físico (TAF)", "Simulados semanais"],
+                accent: true
+            },
+            {
+                id: "ribamar",
+                title: "Turma Ribamar",
+                desc: "Exclusivo para São José de Ribamar.",
+                chips: ["Presencial", "Local", "Vagas Extras"],
+                benefits: ["Aulas noturnas", "Professores locais"],
+                accent: false
+            }
+        ];
+
+        // --- STATE ---
+        let selectedCourse = null;
+        let leadData = {
+            utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "", utm_term: "",
+            lead_id: ""
+        };
+
+        // --- DOM REFERENCES ---
+        const grid = document.getElementById('courseGrid');
+        const modal = document.getElementById('leadModal');
+        const btnNext = document.getElementById('btnNext');
+        const btnBack = document.getElementById('btnBack');
+        const btnSubmit = document.getElementById('btnSubmit');
+        const form = document.getElementById('leadForm');
+
+        // --- INITIALIZATION ---
+        (function init() {
+            renderCourses();
+            captureUTMs();
+            setupPhoneMask();
+            setupModalEvents();
+            setupFormLogic();
+        })();
+
+        // --- RENDER COURSES ---
+        function renderCourses() {
+            grid.innerHTML = courses.map(c => `
+                <div class="card" onclick="openModal('${c.id}')" tabindex="0">
+                    <div class="card-header">
+                        <h2 class="card-title">${c.title}</h2>
+                        <p class="card-desc">${c.desc}</p>
+                    </div>
+                    <div class="chips-row">
+                        ${c.chips.map(chip => `<span class="chip ${c.accent ? 'accent' : ''}">${chip}</span>`).join('')}
+                    </div>
+                    <div class="benefits-list">
+                        ${c.benefits.map(b => `
+                            <div class="benefit-item">
+                                <span class="benefit-icon">✓</span> ${b}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="btn-card">
+                        Quero falar no WhatsApp
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- MODAL LOGIC ---
+        window.openModal = function (courseId) {
+            selectedCourse = courses.find(c => c.id === courseId);
+            if (!selectedCourse) return;
+
+            // UI Updates
+            document.getElementById('modalCourseTitle').innerText = selectedCourse.title;
+            document.getElementById('summaryCourse').innerText = selectedCourse.title;
+
+            // Reset Form Steps
+            document.getElementById('step1').classList.add('active');
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('barStep2').classList.remove('active');
+
+            modal.classList.add('active');
+            document.getElementById('inputName').focus();
+
+            // Accessibility
+            modal.setAttribute('aria-hidden', 'false');
+        };
+
+        function closeModal() {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        function setupModalEvents() {
+            document.getElementById('closeModal').onclick = closeModal;
+
+            // Close on outside click
+            modal.onclick = (e) => {
+                if (e.target === modal) closeModal();
+            };
+
+            // Esc key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === "Escape" && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        }
+
+        // --- FORM LOGIC ---
+        function setupFormLogic() {
+            // STEP 1 -> STEP 2
+            btnNext.onclick = () => {
+                if (validateStep1()) {
+                    // Update Summary
+                    document.getElementById('summaryPhone').innerText = document.getElementById('inputPhone').value;
+
+                    // Transition
+                    document.getElementById('step1').classList.remove('active');
+                    document.getElementById('step2').classList.add('active');
+                    document.getElementById('barStep2').classList.add('active');
+                }
+            };
+
+            // STEP 2 -> STEP 1
+            btnBack.onclick = () => {
+                document.getElementById('step2').classList.remove('active');
+                document.getElementById('step1').classList.add('active');
+                document.getElementById('barStep2').classList.remove('active');
+            };
+
+            // SUBMIT
+            form.onsubmit = async (e) => {
+                e.preventDefault();
+                await handleSubmit();
+            };
+        }
+
+        function validateStep1() {
+            let valid = true;
+
+            // Name
+            const name = document.getElementById('inputName').value.trim();
+            if (name.length < 3) {
+                showError('errName', true); valid = false;
+            } else showError('errName', false);
+
+            // Email
+            const email = document.getElementById('inputEmail').value.trim();
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!re.test(email)) {
+                showError('errEmail', true); valid = false;
+            } else showError('errEmail', false);
+
+            // Phone
+            const phone = document.getElementById('inputPhone').value.replace(/\D/g, '');
+            if (phone.length < 10) {
+                showError('errPhone', true); valid = false;
+            } else showError('errPhone', false);
+
+            return valid;
+        }
+
+        function showError(id, show) {
+            document.getElementById(id).style.display = show ? 'block' : 'none';
+            document.getElementById(id.replace('err', 'input')).classList.toggle('error', show);
+        }
+
+        // --- SUBMISSION & REDIRECT ---
+        async function handleSubmit() {
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = `<span class="spinner"></span> Enviando...`;
+
+            // Prepare Data
+            const formData = {
+                lead_id: generateLeadId(),
+                nome: document.getElementById('inputName').value,
+                email: document.getElementById('inputEmail').value,
+                whatsapp: document.getElementById('inputPhone').value,
+                turma: selectedCourse.title,
+                page_url: window.location.href,
+                user_agent: navigator.userAgent,
+                utm_source: leadData.utm_source,
+                utm_medium: leadData.utm_medium,
+                utm_campaign: leadData.utm_campaign,
+                utm_term: leadData.utm_term,
+                utm_content: leadData.utm_content
+            };
+
+            // Send to GAS
+            try {
+                // Use no-cors mode for transparency if needed, but standard POST is better for debugging
+                // Note: GAS requires Content-Type: text/plain for CORS workarounds sometimes, but we use modern fetch
+
+                // Fire and forget strategy (Optimization for speed) OR Await
+                // We will try to await briefly, but prioritize redirect
+
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 4000); // 4s timeout
+
+                if (SCRIPT_URL && SCRIPT_URL !== "URL_DO_SEU_APPS_SCRIPT_AQUI") {
+                    await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors', // Important for GAS opaque response
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData),
+                        signal: controller.signal
+                    });
+                }
+                clearTimeout(timeoutId);
+
+            } catch (err) {
+                console.warn("GAS save failed or timed out", err);
+                showToast("Não registramos no sistema, mas vamos te atender no WhatsApp.");
+            }
+
+            // Construct WhatsApp Link
+            const cleanPhone = formData.whatsapp.replace(/\D/g, '');
+            const msg = `Olá! Me chamo ${formData.nome}. Quero a turma ${formData.turma}. Meu WhatsApp é ${formData.whatsapp} e meu e-mail é ${formData.email}. Lead: ${formData.lead_id}. UTM: ${formData.utm_campaign}/${formData.utm_source}.`;
+
+            const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+
+            // Redirect
+            window.location.href = waLink;
+        }
+
+        // --- HELPERS ---
+        function setupPhoneMask() {
+            const el = document.getElementById('inputPhone');
+            el.addEventListener('input', (e) => {
+                let v = e.target.value.replace(/\D/g, "");
+                v = v.substring(0, 11); // Max 11 digits
+
+                // Format: (XX) XXXXX-XXXX
+                if (v.length > 2) v = `(${v.substring(0, 2)}) ${v.substring(2)}`;
+                if (v.length > 10) v = `${v.substring(0, 10)}-${v.substring(10)}`;
+
+                e.target.value = v;
+            });
+        }
+
+        function captureUTMs() {
+            const params = new URLSearchParams(window.location.search);
+            ['source', 'medium', 'campaign', 'content', 'term'].forEach(key => {
+                leadData[`utm_${key}`] = params.get(`utm_${key}`) || "";
+            });
+        }
+
+        function generateLeadId() {
+            return 'L' + Date.now().toString(36) + Math.random().toString(36).substr(2, 5).toUpperCase();
+        }
+
+        function showToast(text) {
+            const t = document.getElementById('toast');
+            t.innerText = text;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 4000);
+        }
+
+    </script>
+</body>
+
+</html>
