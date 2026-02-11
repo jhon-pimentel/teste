@@ -34,3 +34,13 @@ Não esqueça de configurar a URL do Backend no arquivo `index.html`:
 const SCRIPT_URL = "SUA_URL_DO_GOOGLE_APPS_SCRIPT";
 ```
 *(Veja o arquivo `DEPLOY_GUIDE.md` para saber como gerar essa URL)*
+
+## Como Configurar Domínio Personalizado (Subdomínio)
+Para usar um endereço como `bio.suaempresa.com`:
+
+1.  Acesse o painel do seu projeto na **Vercel**.
+2.  Vá em **Settings** > **Domains**.
+3.  Digite o subdomínio desejado (ex: `bio.seusite.com`) e clique em **Add**.
+4.  A Vercel vai te dar os valores de DNS (geralmente um **CNAME** apontando para `cname.vercel-dns.com`).
+5.  Vá onde você comprou seu domínio (GoDaddy, Registro.br, Hostgator) e crie esse registro CNAME.
+6.  Aguarde a propagação (pode levar de 1h a 24h).
