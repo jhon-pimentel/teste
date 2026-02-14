@@ -1008,7 +1008,8 @@
 
             // Construct WhatsApp Link
             const cleanPhone = formData.whatsapp.replace(/\D/g, '');
-            const msg = `Olá! Me chamo ${formData.nome}. Quero a turma ${formData.turma}. Meu WhatsApp é ${formData.whatsapp} e meu e-mail é ${formData.email}. Lead: ${formData.lead_id}. UTM: ${formData.utm_campaign}/${formData.utm_source}.`;
+            // const msg = `Olá! Me chamo ${formData.nome}. Quero a turma ${formData.turma}. Meu WhatsApp é ${formData.whatsapp} e meu e-mail é ${formData.email}. Lead: ${formData.lead_id}. UTM: ${formData.utm_campaign}/${formData.utm_source}.`;
+            const msg = `Olá, me chamo ${formData.nome} e tenho interesse na turma para ${formData.turma}.`;
 
             const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
