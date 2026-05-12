@@ -3,10 +3,29 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P2C9G8NR');</script>
+    <!-- End Google Tag Manager -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prepara Cursos e Concursos - Escolha sua Turma</title>
     <meta name="description"
         content="Garanta sua vaga na turma presencial do Prepara. Cursos e Concursos com excelência em São Luís.">
+
+    <!-- Open Graph / WhatsApp / Instagram preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://prepara.vercel.app/turmas-abertas/">
+    <meta property="og:title" content="Prepara Cursos e Concursos - Turmas Abertas">
+    <meta property="og:description" content="Vagas limitadas! Escolha sua turma presencial e garanta sua aprovação. Atendimento rápido pelo WhatsApp.">
+    <meta property="og:image" content="https://prepara.vercel.app/turmas-abertas/logo.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prepara Cursos e Concursos - Turmas Abertas">
+    <meta name="twitter:description" content="Vagas limitadas! Escolha sua turma e fale com a gente no WhatsApp.">
+    <meta name="twitter:image" content="https://prepara.vercel.app/turmas-abertas/logo.png">
 
     <!-- Vercel Analytics -->
     <script defer src="/_vercel/insights/script.js"></script>
@@ -24,9 +43,7 @@
         :root {
             --color-primary: #00297C;
             --color-primary-light: #003399;
-            /* Used for gradients/hover */
             --color-accent: #FBB63A;
-            /* Yellow */
             --color-accent-hover: #e0a334;
             --color-alert: #E83C34;
             --color-text-main: #1A1A1A;
@@ -39,7 +56,6 @@
 
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 20px rgba(0, 41, 124, 0.08);
-            /* slight blue tint */
             --shadow-lg: 0 8px 30px rgba(0, 41, 124, 0.12);
 
             --radius-md: 12px;
@@ -110,17 +126,43 @@
             }
         }
 
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in,
+            .form-step.active,
+            .modal-container,
+            .modal-overlay {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
         /* --- HEADER / HERO --- */
         header {
             background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
             color: var(--color-white);
             padding: 60px 0 80px;
-            /* Extra padding bottom for overlap effect */
             position: relative;
             overflow: hidden;
         }
 
-        /* Subtle noise texture overlay */
         header::before {
             content: "";
             position: absolute;
@@ -132,7 +174,6 @@
             pointer-events: none;
         }
 
-        /* Logo Placeholder */
         .logo-area {
             display: flex;
             justify-content: center;
@@ -143,19 +184,6 @@
             max-width: 200px;
             height: auto;
             display: block;
-        }
-
-        .logo-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border-radius: var(--radius-md);
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            color: var(--color-white);
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .hero-content h1 {
@@ -175,6 +203,14 @@
             margin-right: auto;
         }
 
+        .hero-about {
+            font-size: 0.9rem;
+            opacity: 0.75;
+            max-width: 500px;
+            margin: 0 auto 24px;
+            font-weight: 400;
+        }
+
         .trust-badge {
             display: inline-flex;
             align-items: center;
@@ -188,6 +224,10 @@
             border: 1px solid rgba(251, 182, 58, 0.3);
         }
 
+        .trust-badge svg {
+            flex-shrink: 0;
+        }
+
         .stats-row {
             display: flex;
             justify-content: center;
@@ -195,6 +235,7 @@
             margin-top: 24px;
             font-size: 0.85rem;
             opacity: 0.8;
+            flex-wrap: wrap;
         }
 
         .stat-item {
@@ -203,10 +244,13 @@
             gap: 6px;
         }
 
+        .stat-item svg {
+            flex-shrink: 0;
+        }
+
         /* --- CARDS SECTION --- */
         .cards-section {
             margin-top: -50px;
-            /* Overlap header */
             padding-bottom: 60px;
             position: relative;
             z-index: 10;
@@ -233,15 +277,30 @@
         }
 
         .card:hover,
-        .card:focus-within {
+        .card:focus-visible {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
             border-color: rgba(251, 182, 58, 0.5);
-            /* sutil accent border */
+            outline: none;
         }
 
         .card:active {
             transform: scale(0.99);
+        }
+
+        /* Badge de destaque */
+        .card-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--color-accent);
+            color: #7A5000;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 0 var(--radius-lg) 0 var(--radius-md);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .card-header {
@@ -265,7 +324,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .chip {
@@ -282,6 +341,33 @@
         .chip.accent {
             background: #FFF8E1;
             color: #D99000;
+        }
+
+        /* Indicador de vagas */
+        .vacancy-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            width: fit-content;
+        }
+
+        .vacancy-indicator.low {
+            background: #FFF4F4;
+            color: var(--color-alert);
+        }
+
+        .vacancy-indicator.medium {
+            background: #FFF8E1;
+            color: #B87A00;
+        }
+
+        .vacancy-indicator svg {
+            flex-shrink: 0;
         }
 
         .benefits-list {
@@ -307,7 +393,8 @@
 
         .benefit-icon {
             color: var(--color-accent);
-            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 1px;
         }
 
         .btn-card {
@@ -363,17 +450,49 @@
             flex: 1 1 250px;
         }
 
+        .testi-stars {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 10px;
+            color: var(--color-accent);
+        }
+
         .testi-text {
             font-size: 0.9rem;
             font-style: italic;
             color: #555;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .testi-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .testi-name {
             font-size: 0.8rem;
             font-weight: 700;
             color: var(--color-primary);
+        }
+
+        .testi-course {
+            font-size: 0.7rem;
+            color: var(--color-text-light);
         }
 
         /* --- MODAL --- */
@@ -384,7 +503,6 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 41, 124, 0.6);
-            /* tinted overlay */
             backdrop-filter: blur(4px);
             z-index: 1000;
             display: flex;
@@ -486,18 +604,6 @@
             animation: slideIn 0.3s ease;
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         .form-group {
             margin-bottom: 16px;
             text-align: left;
@@ -509,6 +615,13 @@
             font-weight: 600;
             color: var(--color-text-main);
             margin-bottom: 6px;
+        }
+
+        .form-label .optional-tag {
+            font-weight: 400;
+            color: var(--color-text-light);
+            font-size: 0.75rem;
+            margin-left: 4px;
         }
 
         .form-input {
@@ -536,6 +649,20 @@
             color: var(--color-alert);
             margin-top: 4px;
             display: none;
+        }
+
+        .privacy-note {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            color: #999;
+            margin-top: 12px;
+        }
+
+        .privacy-note svg {
+            flex-shrink: 0;
+            color: #bbb;
         }
 
         .summary-box {
@@ -594,7 +721,6 @@
             background: #f0f0f0;
         }
 
-        /* Loader inside button */
         .spinner {
             display: inline-block;
             width: 16px;
@@ -603,12 +729,6 @@
             border-radius: 50%;
             border-top-color: white;
             animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
         }
 
         /* --- FOOTER --- */
@@ -620,22 +740,12 @@
             border-top: 1px solid #eee;
         }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .cards-section {
-                margin-top: -30px;
-            }
-
-            .modal-container {
-                padding: 24px;
-                width: 95%;
-            }
+        footer a {
+            color: var(--color-primary);
+            font-weight: 600;
         }
 
+        /* --- TOAST --- */
         .toast {
             position: fixed;
             bottom: 20px;
@@ -654,10 +764,30 @@
         .toast.show {
             transform: translateX(-50%) translateY(0);
         }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .cards-section {
+                margin-top: -30px;
+            }
+
+            .modal-container {
+                padding: 24px;
+                width: 95%;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2C9G8NR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- HERO -->
     <header>
@@ -668,14 +798,22 @@
 
             <div class="hero-content">
                 <div class="trust-badge">
-                    <span>🏆</span> 100% Presencial
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    100% Presencial
                 </div>
                 <h1 style="margin-top:16px;">Escolha sua turma</h1>
                 <p>Preencha seus dados em 20s e fale com nossa equipe direto no WhatsApp. Vagas limitadas.</p>
+                <p class="hero-about">Há mais de 10 anos formando aprovados em São Luís — MA. Duas unidades: Cohatrac e Ribamar.</p>
 
                 <div class="stats-row">
-                    <div class="stat-item">✅ <span id="student-count">+5.000 Alunos</span></div>
-                    <div class="stat-item">⚡ Atendimento Rápido</div>
+                    <div class="stat-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FBB63A" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <span>+5.000 Alunos</span>
+                    </div>
+                    <div class="stat-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FBB63A" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        Atendimento Rápido
+                    </div>
                 </div>
             </div>
         </div>
@@ -685,7 +823,7 @@
     <section class="cards-section">
         <div class="container">
             <div class="cards-grid" id="courseGrid">
-                <!-- Cards will be injected via JS -->
+                <!-- Cards injetados via JS -->
             </div>
         </div>
     </section>
@@ -696,33 +834,69 @@
             <div class="sp-headline">MÉTODO, CONSTÂNCIA E APROVAÇÃO</div>
             <div class="testimonials-grid">
                 <div class="testi-item">
-                    <div class="testi-text">"O suporte presencial faz toda diferença. A equipe te acompanha de verdade."
+                    <div class="testi-stars">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     </div>
-                    <div class="testi-author">- Ana Paula S.</div>
+                    <div class="testi-text">"O suporte presencial faz toda diferença. A equipe te acompanha de verdade."</div>
+                    <div class="testi-author">
+                        <div class="testi-avatar">AS</div>
+                        <div>
+                            <div class="testi-name">Ana Paula S.</div>
+                            <div class="testi-course">Aprovada — SEDUC MA</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="testi-item">
-                    <div class="testi-text">"Material focado no edital, sem enrolação. Ajudou muito na minha aprovação."
+                    <div class="testi-stars">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     </div>
-                    <div class="testi-author">- Carlos Mendes</div>
+                    <div class="testi-text">"Material focado no edital, sem enrolação. Ajudou muito na minha aprovação."</div>
+                    <div class="testi-author">
+                        <div class="testi-avatar">CM</div>
+                        <div>
+                            <div class="testi-name">Carlos Mendes</div>
+                            <div class="testi-course">Aprovado — PMMA</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="testi-item">
-                    <div class="testi-text">"Ambiente sério e comprometido. Recomendo para quem quer estudar de
-                        verdade."</div>
-                    <div class="testi-author">- Marina Lima</div>
+                    <div class="testi-stars">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="testi-text">"Ambiente sério e comprometido. Recomendo para quem quer estudar de verdade."</div>
+                    <div class="testi-author">
+                        <div class="testi-avatar">ML</div>
+                        <div>
+                            <div class="testi-name">Marina Lima</div>
+                            <div class="testi-course">Aprovada — Turma Ribamar</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <p style="margin-top:30px; font-size:0.75rem; color:#aaa;">© 2024 Prepara Cursos. Todos os direitos
-                reservados.</p>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
+        <p>© 2026 Prepara Cursos e Concursos. Todos os direitos reservados.</p>
+        <p style="margin-top:6px;">São Luís — MA &middot; Unidades: Cohatrac e Ribamar</p>
     </footer>
 
     <!-- MODAL -->
     <div class="modal-overlay" id="leadModal" aria-hidden="true">
-        <div class="modal-container" role="dialog" aria-modal="true">
+        <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modalCourseTitle">
             <button class="close-modal" id="closeModal" aria-label="Fechar">&times;</button>
 
             <div class="modal-header">
@@ -735,29 +909,34 @@
                 <div class="step-bar" id="barStep2"></div>
             </div>
 
-            <form id="leadForm">
+            <form id="leadForm" novalidate>
                 <!-- STEP 1 -->
                 <div class="form-step active" id="step1">
                     <div class="form-group">
                         <label class="form-label" for="inputName">Nome Completo</label>
-                        <input type="text" class="form-input" id="inputName" placeholder="Seu nome" required>
-                        <div class="error-msg" id="errName">Preencha seu nome.</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="inputEmail">E-mail</label>
-                        <input type="email" class="form-input" id="inputEmail" placeholder="seu@email.com" required>
-                        <div class="error-msg" id="errEmail">E-mail inválido.</div>
+                        <input type="text" class="form-input" id="inputName" placeholder="Seu nome" required autocomplete="name">
+                        <div class="error-msg" id="errName" role="alert">Preencha seu nome.</div>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="inputPhone">WhatsApp (com DDD)</label>
                         <input type="tel" class="form-input" id="inputPhone" placeholder="(98) 99999-9999"
-                            maxlength="15" required>
-                        <div class="error-msg" id="errPhone">Telefone inválido.</div>
+                            maxlength="15" required autocomplete="tel">
+                        <div class="error-msg" id="errPhone" role="alert">Telefone inválido.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="inputEmail">
+                            E-mail
+                            <span class="optional-tag">(opcional)</span>
+                        </label>
+                        <input type="email" class="form-input" id="inputEmail" placeholder="seu@email.com" autocomplete="email">
+                        <div class="error-msg" id="errEmail" role="alert">E-mail inválido.</div>
                     </div>
 
                     <button type="button" class="btn-primary" id="btnNext">Continuar</button>
-                    <p style="text-align:center; font-size:0.75rem; color:#999; margin-top:12px;">Seus dados estão
-                        seguros.</p>
+                    <div class="privacy-note">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        Seus dados estão seguros e não serão compartilhados.
+                    </div>
                 </div>
 
                 <!-- STEP 2 -->
@@ -777,13 +956,12 @@
     </div>
 
     <!-- TOAST -->
-    <div id="toast" class="toast">Redirecionando para o WhatsApp...</div>
+    <div id="toast" class="toast" role="status" aria-live="polite">Redirecionando para o WhatsApp...</div>
 
     <script>
         // --- CONFIGURATION ---
-        // ⚠️ ALERTA: Substitua pela URL do seu Web App do Google Apps Script após o deploy
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbybA9qWSLlegnieNDt4dMY2aE1Ud374g2SlQpnKQ5-OF4JMc4WT_zaZd5yhbE1KfryU/exec";
-        const WHATSAPP_NUMBER = "5598981331829"; // Apenas números
+        const WHATSAPP_NUMBER = "5598981331829";
 
         // --- DATA ---
         const courses = [
@@ -792,24 +970,30 @@
                 title: "SEDUC MA + Ribamar (Professores)",
                 desc: "Unidade Cohatrac. Foco total no edital.",
                 chips: ["Presencial", "São Luís", "Intensivo"],
-                benefits: ["Material atualizado", "Resolução de questões"],
-                accent: false
+                benefits: ["Apostila atualizada com o edital", "Resolução de questões em aula", "Simulados semanais comentados"],
+                vacancy: { count: 12, level: "medium" },
+                accent: false,
+                badge: null
             },
             {
                 id: "operacao-farda",
                 title: "Operação Farda",
                 desc: "Unidade Cohatrac. PMMA + CBMMA.",
                 chips: ["Presencial", "Carreira Policial"],
-                benefits: ["Conteúdo focado", "Simulados semanais"],
-                accent: true
+                benefits: ["Conteúdo focado em carreira policial", "Simulados aos sábados", "Preparação física inclusa"],
+                vacancy: { count: 7, level: "low" },
+                accent: true,
+                badge: "Mais Procurado"
             },
             {
                 id: "ribamar",
                 title: "Turma Ribamar",
                 desc: "Unidade Ribamar. Nível Médio/Técnico.",
                 chips: ["Presencial", "Nível Médio", "Vagas Extras"],
-                benefits: ["Aulas noturnas", "Professores locais"],
-                accent: false
+                benefits: ["Aulas noturnas — não perca o emprego", "Professores da região", "Material impresso incluso"],
+                vacancy: { count: 18, level: "medium" },
+                accent: false,
+                badge: null
             }
         ];
 
@@ -828,6 +1012,12 @@
         const btnSubmit = document.getElementById('btnSubmit');
         const form = document.getElementById('leadForm');
 
+        // SVG ícone de check para os benefícios
+        const checkSVG = `<svg class="benefit-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FBB63A" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
+
+        // SVG ícone de vaga
+        const vacancySVG = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
+
         // --- INITIALIZATION ---
         (function init() {
             renderCourses();
@@ -839,8 +1029,21 @@
 
         // --- RENDER COURSES ---
         function renderCourses() {
-            grid.innerHTML = courses.map(c => `
-                <div class="card" onclick="openModal('${c.id}')" tabindex="0">
+            grid.innerHTML = courses.map(c => {
+                const vacancyLabel = c.vacancy.count <= 8
+                    ? `${c.vacancy.count} vagas restantes`
+                    : `${c.vacancy.count} vagas disponíveis`;
+
+                return `
+                <div
+                    class="card"
+                    onclick="openModal('${c.id}')"
+                    onkeydown="handleCardKey(event, '${c.id}')"
+                    tabindex="0"
+                    role="button"
+                    aria-label="Ver turma ${c.title}"
+                >
+                    ${c.badge ? `<div class="card-badge">${c.badge}</div>` : ''}
                     <div class="card-header">
                         <h2 class="card-title">${c.title}</h2>
                         <p class="card-desc">${c.desc}</p>
@@ -848,10 +1051,14 @@
                     <div class="chips-row">
                         ${c.chips.map(chip => `<span class="chip ${c.accent ? 'accent' : ''}">${chip}</span>`).join('')}
                     </div>
+                    <div class="vacancy-indicator ${c.vacancy.level}">
+                        ${vacancySVG}
+                        ${vacancyLabel}
+                    </div>
                     <div class="benefits-list">
                         ${c.benefits.map(b => `
                             <div class="benefit-item">
-                                <span class="benefit-icon">✓</span> ${b}
+                                ${checkSVG} ${b}
                             </div>
                         `).join('')}
                     </div>
@@ -860,28 +1067,39 @@
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
+
+        // --- KEYBOARD SUPPORT NOS CARDS ---
+        window.handleCardKey = function(event, courseId) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openModal(courseId);
+            }
+        };
 
         // --- MODAL LOGIC ---
         window.openModal = function (courseId) {
             selectedCourse = courses.find(c => c.id === courseId);
             if (!selectedCourse) return;
 
-            // UI Updates
             document.getElementById('modalCourseTitle').innerText = selectedCourse.title;
             document.getElementById('summaryCourse').innerText = selectedCourse.title;
 
-            // Reset Form Steps
+            // Reset steps
             document.getElementById('step1').classList.add('active');
             document.getElementById('step2').classList.remove('active');
             document.getElementById('barStep2').classList.remove('active');
+            document.getElementById('barStep1').classList.add('active');
+
+            // Reset form inputs
+            form.reset();
+            // Limpa estados de erro
+            ['errName', 'errPhone', 'errEmail'].forEach(id => showError(id, false));
 
             modal.classList.add('active');
-            document.getElementById('inputName').focus();
-
-            // Accessibility
             modal.setAttribute('aria-hidden', 'false');
+            document.getElementById('inputName').focus();
         };
 
         function closeModal() {
@@ -892,12 +1110,10 @@
         function setupModalEvents() {
             document.getElementById('closeModal').onclick = closeModal;
 
-            // Close on outside click
             modal.onclick = (e) => {
                 if (e.target === modal) closeModal();
             };
 
-            // Esc key
             document.addEventListener('keydown', (e) => {
                 if (e.key === "Escape" && modal.classList.contains('active')) {
                     closeModal();
@@ -907,27 +1123,22 @@
 
         // --- FORM LOGIC ---
         function setupFormLogic() {
-            // STEP 1 -> STEP 2
             btnNext.onclick = () => {
                 if (validateStep1()) {
-                    // Update Summary
                     document.getElementById('summaryPhone').innerText = document.getElementById('inputPhone').value;
 
-                    // Transition
                     document.getElementById('step1').classList.remove('active');
                     document.getElementById('step2').classList.add('active');
                     document.getElementById('barStep2').classList.add('active');
                 }
             };
 
-            // STEP 2 -> STEP 1
             btnBack.onclick = () => {
                 document.getElementById('step2').classList.remove('active');
                 document.getElementById('step1').classList.add('active');
                 document.getElementById('barStep2').classList.remove('active');
             };
 
-            // SUBMIT
             form.onsubmit = async (e) => {
                 e.preventDefault();
                 await handleSubmit();
@@ -937,31 +1148,39 @@
         function validateStep1() {
             let valid = true;
 
-            // Name
+            // Nome
             const name = document.getElementById('inputName').value.trim();
             if (name.length < 3) {
                 showError('errName', true); valid = false;
             } else showError('errName', false);
 
-            // Email
-            const email = document.getElementById('inputEmail').value.trim();
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!re.test(email)) {
-                showError('errEmail', true); valid = false;
-            } else showError('errEmail', false);
-
-            // Phone
+            // Telefone
             const phone = document.getElementById('inputPhone').value.replace(/\D/g, '');
             if (phone.length < 10) {
                 showError('errPhone', true); valid = false;
             } else showError('errPhone', false);
 
+            // E-mail (opcional — só valida se preenchido)
+            const email = document.getElementById('inputEmail').value.trim();
+            if (email.length > 0) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!re.test(email)) {
+                    showError('errEmail', true); valid = false;
+                } else showError('errEmail', false);
+            } else {
+                showError('errEmail', false);
+            }
+
             return valid;
         }
 
         function showError(id, show) {
-            document.getElementById(id).style.display = show ? 'block' : 'none';
-            document.getElementById(id.replace('err', 'input')).classList.toggle('error', show);
+            const errEl = document.getElementById(id);
+            if (errEl) errEl.style.display = show ? 'block' : 'none';
+
+            const inputId = id.replace('err', 'input');
+            const inputEl = document.getElementById(inputId);
+            if (inputEl) inputEl.classList.toggle('error', show);
         }
 
         // --- SUBMISSION & REDIRECT ---
@@ -969,7 +1188,6 @@
             btnSubmit.disabled = true;
             btnSubmit.innerHTML = `<span class="spinner"></span> Enviando...`;
 
-            // Prepare Data
             const formData = {
                 lead_id: generateLeadId(),
                 nome: document.getElementById('inputName').value,
@@ -985,21 +1203,14 @@
                 utm_content: leadData.utm_content
             };
 
-            // Send to GAS
             try {
-                // Use no-cors mode for transparency if needed, but standard POST is better for debugging
-                // Note: GAS requires Content-Type: text/plain for CORS workarounds sometimes, but we use modern fetch
-
-                // Fire and forget strategy (Optimization for speed) OR Await
-                // We will try to await briefly, but prioritize redirect
-
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 4000); // 4s timeout
+                const timeoutId = setTimeout(() => controller.abort(), 4000);
 
-                if (SCRIPT_URL && SCRIPT_URL !== "URL_DO_SEU_APPS_SCRIPT_AQUI") {
+                if (SCRIPT_URL) {
                     await fetch(SCRIPT_URL, {
                         method: 'POST',
-                        mode: 'no-cors', // Important for GAS opaque response
+                        mode: 'no-cors',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(formData),
                         signal: controller.signal
@@ -1012,14 +1223,8 @@
                 showToast("Não registramos no sistema, mas vamos te atender no WhatsApp.");
             }
 
-            // Construct WhatsApp Link
-            const cleanPhone = formData.whatsapp.replace(/\D/g, '');
-            // const msg = `Olá! Me chamo ${formData.nome}. Quero a turma ${formData.turma}. Meu WhatsApp é ${formData.whatsapp} e meu e-mail é ${formData.email}. Lead: ${formData.lead_id}. UTM: ${formData.utm_campaign}/${formData.utm_source}.`;
             const msg = `Olá, me chamo ${formData.nome} e tenho interesse na turma para ${formData.turma}.`;
-
             const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-
-            // Redirect
             window.location.href = waLink;
         }
 
@@ -1028,11 +1233,17 @@
             const el = document.getElementById('inputPhone');
             el.addEventListener('input', (e) => {
                 let v = e.target.value.replace(/\D/g, "");
-                v = v.substring(0, 11); // Max 11 digits
+                v = v.substring(0, 11);
 
-                // Format: (XX) XXXXX-XXXX
-                if (v.length > 2) v = `(${v.substring(0, 2)}) ${v.substring(2)}`;
-                if (v.length > 10) v = `${v.substring(0, 10)}-${v.substring(10)}`;
+                if (v.length <= 2) {
+                    v = v.length ? `(${v}` : v;
+                } else if (v.length <= 6) {
+                    v = `(${v.substring(0, 2)}) ${v.substring(2)}`;
+                } else if (v.length <= 10) {
+                    v = `(${v.substring(0, 2)}) ${v.substring(2, 6)}-${v.substring(6)}`;
+                } else {
+                    v = `(${v.substring(0, 2)}) ${v.substring(2, 7)}-${v.substring(7)}`;
+                }
 
                 e.target.value = v;
             });
